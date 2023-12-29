@@ -1,7 +1,3 @@
 -bad -bap -nbc -nbbo -hnl -bl -bli0 -blf -bls -c33 -cd33
 -ncdb -nce -cdw -ci4 -cli0 -cp0 -d0 -di16 -nfc1 -i4 -ip0 -l119 -lc119 -lp
 -npcs -nprs -npsl -nut -par -sai -saf -saw -ncs -nsc -nsob -fca -cp0 -nss
--T fifo_t
--T fifo_queue_t
--T hal_ln_tx_done_cb
--T lnpacket_t

@@ -3,7 +3,7 @@
  *
  * Created: 26-11-2023 16:48:54
  *  Author: Mikael Ejberg Pedersen
- */ 
+ */
 
 #include <avr/pgmspace.h>
 #include <stdint.h>
@@ -15,7 +15,7 @@ extern const __flash cmdlist_t __cmdtable_end;
 
 static void helpCmd(uint8_t argc, char *argv[])
 {
-    const __flash cmdlist_t  *p = &__cmdtable_start;
+    const __flash cmdlist_t *p = &__cmdtable_start;
 
     while (p < &__cmdtable_end)
     {
@@ -29,7 +29,7 @@ CMD(help, "This help");
 
 void cmd_exec(uint8_t argc, char *argv[])
 {
-    const __flash cmdlist_t  *p = &__cmdtable_start;
+    const __flash cmdlist_t *p = &__cmdtable_start;
 
     while (p < &__cmdtable_end)
     {

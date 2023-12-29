@@ -3,7 +3,7 @@
  *
  * Created: 26-11-2023 16:48:42
  *  Author: Mikael Ejberg Pedersen
- */ 
+ */
 
 #ifndef CMD_H_
 #define CMD_H_
