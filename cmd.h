@@ -29,6 +29,19 @@ __attribute__((used, section(".cmdtable." #cmdname))) = { \
     .func = cmdname##Cmd \
 };
 
+/**
+ * Find command in list and execute it.
+ *
+ * @param argc Argument count. Number of arguments in argv.
+ * @param argv Argument vector. Array of argument ptrs.
+ */
 extern void     cmd_exec(uint8_t argc, char *argv[]);
+
+/**
+ * Split command line into argc/argv and call cmd_exec.
+ *
+ * @param cmd Command line.
+ */
+extern void     cmd_split_exec(char *cmd);
 
 #endif /* CMD_H_ */
