@@ -36,7 +36,7 @@ CMD(example, "Put helptext here");
 That is all that's needed.
 
 ### Executing a shell command
-Collect input from a serial port (or anywhere else you want to expose a shell). Once a full line has been read, split it up into argc/argv and call *cmd_exec(argc, argv)*.
-The correct command will be found and called.
+Collect input from a serial port (or anywhere else you want to expose a shell). Once a full line has been read, call *cmd_split_exec* with the line.
+The correct command function will be called.
 
 One command is already provided: *help*. It will print a list of all commands and their helptext.
