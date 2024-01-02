@@ -6,9 +6,9 @@ Requires a small addition to the linker script. A full script isn't included her
 Find the linker script suitable for the AVR in question, then add these four lines somewhere in the .text section:
 ```
 PROVIDE (__cmdtable_start = .) ;
-*(SORT_BY_NAME(.cmdtable*))
+*(SORT_BY_NAME(cmdtable*))
 PROVIDE (__cmdtable_end = .) ;
-KEEP(*(.cmdtable*))
+KEEP(*(cmdtable*))
 ```
 The recommended placement is after .ctors and .dtors, and before .init0
 

@@ -23,7 +23,7 @@ typedef struct
 static const __flash char cmdname##Name[] = #cmdname; \
 static const __flash char cmdname##Help[] = #cmdhelp; \
 static const cmdlist_t cmdname##CmdTableEntry \
-__attribute__((used, section(".cmdtable." #cmdname))) = { \
+__attribute__((used, section("cmdtable." #cmdname))) = { \
     .name = cmdname##Name, \
     .help = cmdname##Help, \
     .func = cmdname##Cmd \
