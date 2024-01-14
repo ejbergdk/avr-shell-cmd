@@ -3,16 +3,17 @@ Small helper library for creating shell commands on an AVR, when using avr-gcc.
 Requires a small addition to the linker script. A full script isn't included here, as it changes depending on which AVR is used.
 
 ## Linker script modifications
-Find the linker script suitable for the AVR in question, then add these four lines somewhere in the .text section:
+Find the linker script suitable for the AVR in question, then add these five lines somewhere in the .text section:
 ```
 PROVIDE (__cmdtable_start = .) ;
 *(SORT_BY_NAME(cmdtable*))
 PROVIDE (__cmdtable_end = .) ;
 KEEP(*(cmdtable*))
+. = ALIGN(2);
 ```
 The recommended placement is after .ctors and .dtors, and before .init0
 
-Then just tell the linker to use the modified linker script (use the -T command line option). In Atmel/Microchip Studio this is done in the project properties (Alt+F7), Toolchain, AVR/GNU Linker, Miscellaneous, Other Linker Flags. Add the line:
+Then tell the linker to use the modified linker script (use the -T command line option). In Atmel/Microchip Studio this is done in the project properties (Alt+F7), Toolchain, AVR/GNU Linker, Miscellaneous, Other Linker Flags. Add the line:
 ```
 -T $(ProjectDir)\avrxmega4.x
 ```
