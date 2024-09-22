@@ -11,12 +11,20 @@
 #include <string.h>
 #include "cmd.h"
 
-extern const __flash cmdlist_t __cmdtable_start;
-extern const __flash cmdlist_t __cmdtable_end;
+#ifdef __AVR_HAVE_ELPMX__
+// AVR supports ELPM with Z+ so cmdtable may be located above 64KB. Use 24-bit pointer
+#define TABLEMEM __memx
+#else
+// AVR doesn't support data in flash above 64KB. Use normal 16-bit pointer
+#define TABLEMEM __flash
+#endif
+
+extern const TABLEMEM cmdlist_t __cmdtable_start;
+extern const TABLEMEM cmdlist_t __cmdtable_end;
 
 static void helpCmd(uint8_t argc, char *argv[])
 {
-    const __flash cmdlist_t *p = &__cmdtable_start;
+    const TABLEMEM cmdlist_t *p = &__cmdtable_start;
 
     while (p < &__cmdtable_end)
     {
@@ -30,7 +38,7 @@ CMD(help, "This help");
 
 void cmd_exec(uint8_t argc, char *argv[])
 {
-    const __flash cmdlist_t *p = &__cmdtable_start;
+    const TABLEMEM cmdlist_t *p = &__cmdtable_start;
 
     while (p < &__cmdtable_end)
     {

@@ -1,28 +1,19 @@
 # avr-shell-cmd
 Small helper library for creating shell commands on an AVR, when using avr-gcc.
-Requires a small addition to the linker script. A full script isn't included here, as it changes depending on which AVR is used.
+Requires adding an augmented linker script.
 
-## Linker script modifications
-Find the linker script suitable for the AVR in question, then add these five lines somewhere in the .text section:
+## Linker script augmentation
+This repository includes an augmented linker script: `cmdtables.ld`. Tell the linker to augment the linker script with this file (use the -T command line option). In Atmel/Microchip Studio this is done in the project properties (Alt+F7), Toolchain, AVR/GNU Linker, Miscellaneous, Other Linker Flags. Add the line:
 ```
-PROVIDE (__cmdtable_start = .) ;
-*(SORT_BY_NAME(cmdtable*))
-PROVIDE (__cmdtable_end = .) ;
-KEEP(*(cmdtable*))
-. = ALIGN(2);
+-T $(ProjectDir)\lib\avr-shell-cmd\cmdtables.ld
 ```
-The recommended placement is after .ctors and .dtors, and before .init0
-
-Then tell the linker to use the modified linker script (use the -T command line option). In Atmel/Microchip Studio this is done in the project properties (Alt+F7), Toolchain, AVR/GNU Linker, Miscellaneous, Other Linker Flags. Add the line:
-```
--T $(ProjectDir)\avrxmega4.x
-```
-Change the path and filename to match your modified linker script.
+Change the path to match where you've included this repo.
 
 If you don't use Atmel/Microchip Studio, add the linker option in your makefile.
 
 ## Using avr-shell-cmd
-First, include the files here in your build. This repo can be included as a submodule.
+First, include the files here in your build. This repo can be included as a submodule.  
+Then add the linker script as described above.
 
 ### Creating a shell command
 Wherever you want a shell command, include cmd.h. Then make a static function with the command you want (name it the command followed by "Cmd"), and then put it in a CMD macro. Here is a command called "example":
